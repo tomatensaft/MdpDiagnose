@@ -1,0 +1,3 @@
+﻿https://infosys.beckhoff.com/content/1031/tc3_ads_ps_tcxaemgmt/index.html
+
+Read-TcValue -IndexGroup 0xF302 -IndexOffset 2148597771 -NetId 39.153.87.34.1.1 -port 10000 -size 0x24

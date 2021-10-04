@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using TwinCAT.Ads;
 
@@ -18,7 +18,7 @@ namespace MdpDiagnose
         {
 
             _AdsClient.Connect(_netId, 10000);
-
+            
             WriteLine($"Connected {_AdsClient.IsConnected}");
             if (_AdsClient.IsConnected)
             {
@@ -72,27 +72,28 @@ namespace MdpDiagnose
                     uint mdpTcMinor = (uint)(_mdpId << 20) | 0x80010002;        //Subindex 2 of Table 0x8nn1
                     uint mpdTcBuild = (uint)(_mdpId << 20) | 0x80010003;        //Subindex 3 of Table 0x8nn1
                     uint mdpTcNetId = (uint)(_mdpId << 20) | 0x80010004;        //Subindex 4 of Table 0x8nn1
-                    uint mdpTcSystemId = (uint)(_mdpId << 20) | 0x8001000B;     //Subindex 11 of Table 0x8nn1
+                   uint mdpTcSystemId = (uint)(_mdpId << 20) | 0x8001000B;     //Subindex 11 of Table 0x8nn1
 
                     // TwinCAT Major module
                     ushort dataTcMajor = (ushort)_AdsClient.ReadAny(0xF302, mdpTcMajor, typeof(ushort));
-                    WriteLine($"TwinCAT Major: {dataTcMajor.ToString()}");
+                    
+                    WriteLine($"Index {mdpTcMajor} ->  TwinCAT Major: {dataTcMajor.ToString()}");
 
                     // TwinCAT Minor module
                     ushort dataTcMinor = (ushort)_AdsClient.ReadAny(0xF302, mdpTcMinor, typeof(ushort));
-                    WriteLine($"TwinCAT Minor: {dataTcMinor.ToString()}");
+                    WriteLine($"Index {mdpTcMinor} ->  TwinCAT Minor: {dataTcMinor.ToString()}");
 
                     // TwinCAT Build module
                     ushort dataTcBuild = (ushort)_AdsClient.ReadAny(0xF302, mpdTcBuild, typeof(ushort));
-                    WriteLine($"TwinCAT Build: {dataTcBuild.ToString()}");
+                    WriteLine($"Index {mpdTcBuild} ->  TwinCAT Build: {dataTcBuild.ToString()}");
 
                     // TwinCAT NetID
                     string dataTcNetId = (string)_AdsClient.ReadAny(0xF302, mdpTcNetId, typeof(string), new int[] { 80 });
-                    WriteLine($"TwinCAT NetId: {dataTcNetId.ToString()}");
+                    WriteLine($"Index {mdpTcNetId} ->  TwinCAT NetId: {dataTcNetId.ToString()}");
 
                     // TwinCAT SystemId
                     string dataTcSystemId = (string)_AdsClient.ReadAny(0xF302, mdpTcSystemId, typeof(string), new int[] { 80 });
-                    WriteLine($"TwinCAT SystemId: {dataTcSystemId.ToString()}");
+                    WriteLine($"Index {mdpTcSystemId} ->  TwinCAT SystemId: {dataTcSystemId.ToString()}");
 
                 }
                 else
@@ -104,9 +105,10 @@ namespace MdpDiagnose
 
             }
 
-
+            ReadKey();
             _AdsClient.Close();
             WriteLine($"Closed");
+
 
 
 
